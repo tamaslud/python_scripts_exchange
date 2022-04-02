@@ -1,3 +1,7 @@
+'''
+Code written by Armand, modified by aTamasLud
+'''
+
 guesses = 6
 warnings = 3
 secret_word = list("apple")
