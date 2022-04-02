@@ -1,2 +1,2 @@
 # python_scripts_exchange
-this repo is for share some python scripts
+this repo is to share some python scripts
