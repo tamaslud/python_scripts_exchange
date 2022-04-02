@@ -1,5 +1,5 @@
 '''
-Code written by Armand, modified by aTamasLud
+Code written by Armand, modified by TamasLud
 '''
 
 guesses = 6
