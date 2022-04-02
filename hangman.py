@@ -1,27 +1,41 @@
 '''
 Code written by Armand, modified by TamasLud
 '''
+from random import choice
+from os import system, name
 
-guesses = 6
-warnings = 3
-secret_word = list("apple")
-guessed_word = list("_" * len (secret_word))
-guessed_chars = []
+def clear_screen():
+    # for windows
+    if name == 'nt':
+        _ = system('cls')  
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
 
-def warning_decrement(decr, warnings, guesses):
+def open_words(filename:str) -> list:
+    with open(filename) as file:
+        data = file.read()
+        words = data.split()
+    return words
+
+
+def warning_decrement(decr:int, warnings:int, guesses:int) -> tuple:
     if warnings == 0:
         guesses -= 1
     else:
         warnings -= decr
     return (warnings, guesses)
 
-def guesses_decrement(decr, guesses):
+
+def guesses_decrement(decr, guesses): 
     guesses -= decr
     if guesses == -1:
         guesses = 0
     return (guesses)
 
+
 def print_hangman(guesses):
+    clear_screen()
     g = "\/\/|o "
     g = (guesses)*" " + g[(guesses):]
     h = f'''
@@ -34,6 +48,18 @@ def print_hangman(guesses):
     ========='''
     print (h)
     return
+
+
+# MAIN CODE FOLLOWS
+
+guesses = 6
+warnings = 3
+guessed_chars = []
+
+words = open_words("3000_english_words.txt")
+all_secret_words = [x for x in words if len(x)>5]
+secret_word = list(choice(all_secret_words))
+guessed_word = list("_" * len (secret_word))
 
 while guesses > 0 and guessed_word != secret_word:
     print_hangman(guesses)
@@ -71,7 +97,6 @@ while guesses > 0 and guessed_word != secret_word:
         guesses = guesses_decrement(decr, guesses)
 
 
-# game ends, evaluation
 print()
 if guessed_word == secret_word:
     print_hangman(6)
